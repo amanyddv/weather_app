@@ -24,3 +24,18 @@ The Weather App is a web application that provides current weather information a
 
    ```bash
    git clone https://github.com/your-username/weather-app.git
+   
+2. Install dependencies:
+   cd weather-app
+   npm install
+   
+4. Run the application:
+   npm start
+
+   
+##Usage
+
+1. Enter the city name in the input field.
+2. Choose between Celsius and Fahrenheit for temperature units.
+
+
