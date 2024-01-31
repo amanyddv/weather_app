@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import CityInput from './components/CityInput';
+import CurrentWeather from './components/CurrentWeather';
+import Forecast from './components/Forecast';
+import './App.css'
+import logo from './assets/logo.png';
+
+
+
 
 function App() {
+  const [city, setCity] = useState('');
+  const [unit, setUnit] = useState('metric');
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    
+    <div className="app">
+    <div className="app-header"> <h1>WeatherApp</h1>
+    <img src={logo} alt="logo"></img>
     </div>
+    <CityInput city={city} setCity={setCity} setUnit={setUnit} />
+    <CurrentWeather city={city} unit={unit} />
+    <Forecast city={city} unit={unit} />
+  </div>
   );
 }
 
