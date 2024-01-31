@@ -33,7 +33,6 @@ The Weather App is a web application that provides current weather information a
 3. Run the application:
    ```bash
    npm start
-
    
 ## Usage
 
