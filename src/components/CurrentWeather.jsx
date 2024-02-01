@@ -44,11 +44,11 @@ const CurrentWeather = ({ city, unit }) => {
         <>
           <div>
             <h2>Current Weather in {weatherData.name}</h2>
-            <p>Min Temperature: <em> {convertTemperature(weatherData.main.temp_min)}</em></p>
-            <p>Max Temperature: <em>{convertTemperature(weatherData.main.temp_max)}</em></p>
-            <p>Humidity:<em> {weatherData.main.humidity}</em>%</p>
-            <p>Wind Speed: <em>{weatherData.wind.speed} m/s, {weatherData.wind.deg}°</em></p>
-            <p>Description:<em> {weatherData.weather[0].description}</em></p>
+            <p>Min Temperature: {convertTemperature(weatherData.main.temp_min)}</p>
+            <p>Max Temperature: {convertTemperature(weatherData.main.temp_max)}</p>
+            <p>Humidity: {weatherData.main.humidity}%</p>
+            <p>Wind Speed: {weatherData.wind.speed} m/s, {weatherData.wind.deg}°</p>
+            <p>Description: {weatherData.weather[0].description}</p>
           </div>
           
           <div className='icon'>
