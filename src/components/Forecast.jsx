@@ -54,7 +54,7 @@ const Forecast = ({ city, unit }) => {
           
           {forecastList.map((item, index) => (
             <li key={item.dt}>
-      <b>{new Date(today.getTime() + index * 24 * 60 * 60 * 1000).toLocaleDateString(undefined, { weekday: 'short' , year: 'numeric', month: 'long', day: 'numeric', })}</b>
+      <b><h3>{new Date(today.getTime() + index * 24 * 60 * 60 * 1000).toLocaleDateString(undefined, { weekday: 'short' , year: 'numeric', month: 'long', day: 'numeric', })}</h3></b>
               <p>
                 Average Temperature: {unit === 'metric' ? `${(item.main.temp - 273.15).toFixed(2)}°C` : `${(((item.main.temp - 273.15) * 9 / 5) + 32).toFixed(2)}°F`}
               </p>
