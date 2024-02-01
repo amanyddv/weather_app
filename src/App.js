@@ -19,8 +19,8 @@ function App() {
     <img src={logo} alt="logo"></img>
     </div>
     <CityInput city={city} setCity={setCity} setUnit={setUnit} />
-    <CurrentWeather city={city} unit={unit} />
-    <Forecast city={city} unit={unit} />
+     {/* <CurrentWeather city={city} unit={unit} />*/}
+   <Forecast city={city} unit={unit} /> 
   </div>
   );
 }
