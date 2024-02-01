@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './CurrentWeather.css'; 
+import './CurrentWeather.css';
 
-const CurrentWeather = ({ city="lucknow", unit }) => {
+const CurrentWeather = ({ city, unit }) => {
   const [weatherData, setWeatherData] = useState(null);
   const [invalidCity, setInvalidCity] = useState(false);
 
@@ -15,7 +15,7 @@ const CurrentWeather = ({ city="lucknow", unit }) => {
         );
 
         setWeatherData(response.data);
-        setInvalidCity(false); 
+        setInvalidCity(false);
       } catch (error) {
         console.error('Error fetching current weather data:', error);
         setInvalidCity(true);
@@ -29,7 +29,7 @@ const CurrentWeather = ({ city="lucknow", unit }) => {
 
   const convertTemperature = (temperature) => {
     if (unit === 'metric') {
-      
+
       return (temperature - 273.15).toFixed(2) + '°C';
     } else {
       return ((temperature - 273.15) * (9 / 5) + 32).toFixed(2) + '°F';
@@ -44,18 +44,20 @@ const CurrentWeather = ({ city="lucknow", unit }) => {
         <>
           <div>
             <h2>Current Weather in {weatherData.name}</h2>
-            <p>Temperature: {convertTemperature(weatherData.main.temp)}</p>
             <p>Min Temperature: {convertTemperature(weatherData.main.temp_min)}</p>
-              <p>Max Temperature: {convertTemperature(weatherData.main.temp_max)}</p>
+            <p>Max Temperature: {convertTemperature(weatherData.main.temp_max)}</p>
             <p>Humidity: {weatherData.main.humidity}%</p>
             <p>Wind Speed: {weatherData.wind.speed} m/s, {weatherData.wind.deg}°</p>
             <p>Description: {weatherData.weather[0].description}</p>
           </div>
-          <div>
-            <img 
+          
+          <div className='icon'>
+            <img
               src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
               alt="Weather Icon"
             />
+            <h1>{convertTemperature(weatherData.main.temp)}
+          </h1>
           </div>
         </>
       ) : null}
