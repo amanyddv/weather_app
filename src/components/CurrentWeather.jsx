@@ -56,8 +56,8 @@ const CurrentWeather = ({ city, unit }) => {
               src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
               alt="Weather Icon"
             />
-           <em> <h1>{convertTemperature(weatherData.main.temp)}
-          </h1></em>
+           <h1>{convertTemperature(weatherData.main.temp)}
+          </h1>
           </div>
         </>
       ) : null}
