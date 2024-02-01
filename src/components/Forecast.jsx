@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Forecast.css'; 
+import './Forecast.css';
 const Forecast = ({ city, unit }) => {
   const [forecastData, setForecastData] = useState(null);
   const [iscitynamevalid, setIsCityNameValid] = useState(true);
@@ -49,13 +49,15 @@ const Forecast = ({ city, unit }) => {
     return (
       <div className="forecast">
         <h2>5-Day Forecast</h2>
+        
         <ul>
+          
           {forecastList.map((item, index) => (
             <li key={item.dt}>
               <p>Date: {new Date(today.getTime() + index * 24 * 60 * 60 * 1000).toLocaleDateString()}</p>
               <p>
-  Average Temperature: {unit === 'metric' ? `${(item.main.temp - 273.15).toFixed(2)}°C` : `${(((item.main.temp - 273.15) * 9/5) + 32).toFixed(2)}°F`}
-</p>
+                Average Temperature: {unit === 'metric' ? `${(item.main.temp - 273.15).toFixed(2)}°C` : `${(((item.main.temp - 273.15) * 9 / 5) + 32).toFixed(2)}°F`}
+              </p>
 
               <p>Description: {item.weather[0].description}</p>
               <img
@@ -65,7 +67,8 @@ const Forecast = ({ city, unit }) => {
             </li>
           ))}
         </ul>
-      </div>
+        
+        </div>
     );
   };
 
