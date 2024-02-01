@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './CurrentWeather.css'; 
 
-const CurrentWeather = ({ city, unit }) => {
+const CurrentWeather = ({ city="lucknow", unit }) => {
   const [weatherData, setWeatherData] = useState(null);
   const [invalidCity, setInvalidCity] = useState(false);
 
