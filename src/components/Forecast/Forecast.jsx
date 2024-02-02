@@ -4,11 +4,14 @@ import './Forecast.css';
 import { GiThermometerScale } from "react-icons/gi";
 
 const Forecast = ({ city, unit }) => {
+
   // State to store forecast data and validate the city name
   const [forecastData, setForecastData] = useState(null);
   const [isValidCityName, setIsValidCityName] = useState(true);
 
+  // Fetch forecast data when city or unit changes
   useEffect(() => {
+
     // Function to fetch forecast data from OpenWeatherMap API
     const fetchForecastData = async () => {
       try {
@@ -17,37 +20,39 @@ const Forecast = ({ city, unit }) => {
         // Validate if the fetched data matches the input city name
         if (city.toLowerCase() !== response.data.city.name.toLowerCase()) {
           setIsValidCityName(false);
-        } else if (response.data && response.data.list) {
+        } 
+        else if (response.data && response.data.list) {
           setIsValidCityName(true);
           setForecastData(response.data);
-        } else {
-          // Log an error if the API response is unexpected
+        } 
+        else {
           console.error('Unexpected API response:', response);
           setForecastData(null);
           setIsValidCityName(false);
         }
-      } catch (error) {
-        // Log an error if there is an issue fetching data
+      } 
+      catch (error) {
         setIsValidCityName(false);
         console.error('Error fetching forecast data:', error);
       }
     };
 
-    // Fetch forecast data when city or unit changes
     fetchForecastData();
   }, [city, unit]);
 
   // Function to convert temperature based on unit
   const convertTemperature = (temperature) => {
-    if (unit === 'celcius') {
+    if (unit === 'celsius') {
       return `${(temperature - 273.15).toFixed(2)}°C`;
-    } else {
+    } 
+    else {
       return `${(((temperature - 273.15) * 9 / 5) + 32).toFixed(2)}°F`;
     }
   };
 
   // Function to render the forecast UI
   const renderForecast = () => {
+
     // Check if forecast data is available and city name is valid
     if (!forecastData || !forecastData.list || !isValidCityName) {
       return <p>No forecast data available.</p>;
@@ -66,6 +71,7 @@ const Forecast = ({ city, unit }) => {
           {forecastList.map((item, index) => (
             <li key={item.dt}>
               <b><h3>{new Date(today.getTime() + index * 24 * 60 * 60 * 1000).toLocaleDateString(undefined, { weekday: 'short' , year: 'numeric', month: 'long', day: 'numeric', })}</h3></b>
+              
               <p>
                 {/* Display average temperature with icon and description */}
                 <abbr className="no-underline" title="Average Temperature">
@@ -79,12 +85,14 @@ const Forecast = ({ city, unit }) => {
                   />
                 </abbr>
               </p>
+
               <p>
                 {/* Display weather description */}
                 <abbr className="no-underline" title="Weather">
                   <em>{item.weather[0].description}</em>
                 </abbr>
               </p>
+              
             </li>
           ))}
         </ul>

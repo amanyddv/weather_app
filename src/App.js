@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import CityInput from './components/CityInput';
-import CurrentWeather from './components/CurrentWeather';
-import Forecast from './components/Forecast';
+import CityInput from './components/CityInput/CityInput';
+import CurrentWeather from './components/CurrentWeather/CurrentWeather';
+import Forecast from './components/Forecast/Forecast';
 import './App.css'
 import logo from './assets/logo.png';
 
 function App() {
+
   // State to track the selected city and temperature unit
   const [city, setCity] = useState('Bengaluru');
-  const [unit, setUnit] = useState('celcius'); // Consider fixing the typo ('celcius' -> 'celsius')
+  const [unit, setUnit] = useState('celsius');
 
   // Render the main application structure
   return (
+
     <div className="app">
+
       {/* Header section with app name and logo */}
       <div className="app-header">
         <h1>WeatherApp</h1>
@@ -27,6 +30,7 @@ function App() {
 
       {/* Forecast component to display the 5-day weather forecast */}
       <Forecast city={city} unit={unit} />
+
     </div>
   );
 }

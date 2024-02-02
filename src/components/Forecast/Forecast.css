@@ -44,8 +44,8 @@
   text-decoration: none;
 }
 
-/* Media query for screens wider than 600px (desktop) */
 
+/* Media query for screens wider than 600px (desktop) */
 @media screen and (min-width: 600px) {
   .forecast {
     flex-direction: row;

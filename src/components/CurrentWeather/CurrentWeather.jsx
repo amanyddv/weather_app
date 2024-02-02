@@ -5,6 +5,7 @@ import { FaWind, FaTemperatureArrowUp, FaTemperatureArrowDown } from "react-icon
 import { WiHumidity } from "react-icons/wi";
 
 const CurrentWeather = ({ city, unit }) => {
+
   // State to store weather data and track if the entered city is invalid
   const [weatherData, setWeatherData] = useState(null);
   const [isCityInvalid, setIsCityInvalid] = useState(false);
@@ -20,10 +21,10 @@ const CurrentWeather = ({ city, unit }) => {
         // Update weather data and set city as valid
         setWeatherData(response.data);
         setIsCityInvalid(false);
-      } catch (error) {
-        // Log an error and mark the city as invalid if there's an issue with the API
-        console.error('Error fetching current weather data:', error);
-        setIsCityInvalid(true);
+
+      } catch (error) {     
+          console.error('Error fetching current weather data:', error);
+          setIsCityInvalid(true);
       }
     };
 
@@ -35,7 +36,7 @@ const CurrentWeather = ({ city, unit }) => {
 
   // Function to convert temperature based on the unit
   const convertTemperature = (temperature) => {
-    if (unit === 'celcius') {
+    if (unit === 'celsius') {
       return (temperature - 273.15).toFixed(2) + '°C';
     } else {
       return ((temperature - 273.15) * (9 / 5) + 32).toFixed(2) + '°F';
@@ -51,11 +52,13 @@ const CurrentWeather = ({ city, unit }) => {
 
   return (
     <div className="current-weather">
+
       {/* Display an error message if the entered city is invalid */}
       {isCityInvalid ? (
         <p className="error-message">The entered city name is invalid. Please provide a valid city name!</p>
       ) : weatherData ? (
         <>
+
           {/* Display current weather information if data is available */}
           <div>
             <h2>Current Weather in {weatherData.name}</h2>
@@ -70,19 +73,22 @@ const CurrentWeather = ({ city, unit }) => {
           </div>
 
           <div className='icon'>
-            {/* Display weather icon with a description */}
+
+            {/* Display weather icon */}
             <abbr title={weatherData.weather[0].description}>
               <img
                 src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}.png`}
                 alt="Weather Icon"
               />
             </abbr>
+
             <h1>
-              {/* Display current temperature with an abbreviation */}
+              {/* Display current temperature and description*/}
               <abbr className="no-underline" title="Current Temperature">{convertTemperature(weatherData.main.temp)}</abbr>
               <p><abbr className="no-underline" title="Weather">{weatherData.weather[0].description}</abbr></p>
             </h1>
           </div>
+
         </>
       ) : null}
     </div>
