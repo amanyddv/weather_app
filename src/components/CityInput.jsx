@@ -1,11 +1,12 @@
 import React, { useState }  from 'react';
-import './CityInput.css'; 
+import './CityInput.css';
+
 
 const CityInput = ({ city, setCity, unit, setUnit }) => {
-  const [unitc, setUnitc] = useState('metric');
+  const [localUnit, setlocalUnit] = useState('metric');
 
   const handleUnitChange = (event) => {
-    setUnitc(event.target.value);
+    setlocalUnit(event.target.value);
     setUnit(event.target.value);
   };
 
@@ -25,7 +26,7 @@ const CityInput = ({ city, setCity, unit, setUnit }) => {
             type="radio"
             name="unit"
             value="metric"
-            checked={unitc === 'metric'}
+            checked={localUnit === 'metric'}
             onChange={handleUnitChange}
           />
           <span className="unit-text">Celsius</span>
@@ -35,7 +36,7 @@ const CityInput = ({ city, setCity, unit, setUnit }) => {
             type="radio"
             name="unit"
             value="imperial"
-            checked={unitc === 'imperial'}
+            checked={localUnit === 'imperial'}
             onChange={ handleUnitChange}
           />
           <span className="unit-text">Fahrenheit</span>

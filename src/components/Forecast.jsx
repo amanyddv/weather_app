@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Forecast.css';
+import { GiThermometerScale } from "react-icons/gi";
+
 const Forecast = ({ city, unit }) => {
   const [forecastData, setForecastData] = useState(null);
   const [iscitynamevalid, setIsCityNameValid] = useState(true);
@@ -56,14 +58,19 @@ const Forecast = ({ city, unit }) => {
             <li key={item.dt}>
       <b><h3>{new Date(today.getTime() + index * 24 * 60 * 60 * 1000).toLocaleDateString(undefined, { weekday: 'short' , year: 'numeric', month: 'long', day: 'numeric', })}</h3></b>
               <p>
-                Average Temperature: {unit === 'metric' ? `${(item.main.temp - 273.15).toFixed(2)}°C` : `${(((item.main.temp - 273.15) * 9 / 5) + 32).toFixed(2)}°F`}
-              </p>
-
-              <p>Description: {item.weather[0].description}</p>
-              <img
+                <abbr className="no-underline" title="Average Temperature">
+              <GiThermometerScale />
+              <strong>
+                
+ {unit === 'metric' ? `${(item.main.temp - 273.15).toFixed(2)}°C` : `${(((item.main.temp - 273.15) * 9 / 5) + 32).toFixed(2)}°F`} 
+ </strong></abbr> 
+ <abbr className="no-underline" title={item.weather[0].description}><img
                 src={`https://openweathermap.org/img/w/${item.weather[0].icon}.png`}
                 alt={item.weather[0].description}
-              />
+              /> </abbr> </p>
+
+              <p><abbr className="no-underline" title="Weather"><em> {item.weather[0].description}</em></abbr></p>
+              
             </li>
           ))}
         </ul>

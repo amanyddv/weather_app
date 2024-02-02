@@ -43,6 +43,9 @@
     height: auto;
     margin-top: 10px;
   }
+  .no-underline {
+    text-decoration: none;
+  }
   
   /* Media query for screens wider than 600px (desktop) */
   @media screen and (min-width: 600px) {

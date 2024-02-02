@@ -10,7 +10,7 @@ import logo from './assets/logo.png';
 
 
 function App() {
-  const [city, setCity] = useState('lucknow');
+  const [city, setCity] = useState('Bengaluru');
   const [unit, setUnit] = useState('metric');
   
   return (
