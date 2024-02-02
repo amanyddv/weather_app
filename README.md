@@ -12,11 +12,11 @@ The Weather App is a web application that provides current weather information a
 
 ## Technologies Used
 
-- React: A JavaScript library for building user interfaces.
+- React: A JavaScript library for building user interfaces. 
 
-- Axios: A promise-based HTTP client for making API requests.
+- Axios: A promise-based HTTP client for making API requests. 
 
-- OpenWeatherMap API: Used for fetching weather data.
+- OpenWeatherMap API: Used for fetching weather data. [Check the documentation here](https://openweathermap.org/api).
 
 - React Icons: A library for including popular icons in React projects. [Check the documentation here](https://react-icons.github.io/react-icons/).
 
