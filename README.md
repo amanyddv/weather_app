@@ -10,6 +10,10 @@ The Weather App is a web application that provides current weather information a
 
 - **5-Day Forecast:** View a 5-day forecast with details like date, average temperature, and weather description.
 
+## Screenshot
+
+![Desktop View of application](./screenshot.png)
+
 ## Technologies Used
 
 - React: A JavaScript library for building user interfaces. 
