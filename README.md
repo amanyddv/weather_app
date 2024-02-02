@@ -18,6 +18,9 @@ The Weather App is a web application that provides current weather information a
 
 - OpenWeatherMap API: Used for fetching weather data.
 
+- React Icons: A library for including popular icons in React projects. [Check the documentation here](https://react-icons.github.io/react-icons/).
+
+
 ## Setup
 
 1. Clone the repository:
