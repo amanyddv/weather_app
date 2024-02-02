@@ -16,7 +16,9 @@
 
 }
 
-/* for mobile phone */
+
+/* Media query for screens with a maximum width of 600px (for responsive design or mobile phone ) */
+
 @media screen and (max-width: 600px) {
   .app {
     max-width: 100%;

@@ -1,85 +1,99 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Forecast.css';
 import { GiThermometerScale } from "react-icons/gi";
 
 const Forecast = ({ city, unit }) => {
+  // State to store forecast data and validate the city name
   const [forecastData, setForecastData] = useState(null);
-  const [iscitynamevalid, setIsCityNameValid] = useState(true);
+  const [isValidCityName, setIsValidCityName] = useState(true);
 
   useEffect(() => {
+    // Function to fetch forecast data from OpenWeatherMap API
     const fetchForecastData = async () => {
       try {
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=7d82a95552f3aa560e26719202acb6b8`);
-        console.log(iscitynamevalid)
-        if (city.toLowerCase() != response.data.city.name.toLowerCase()) {
-          setIsCityNameValid(false);
+        
+        // Validate if the fetched data matches the input city name
+        if (city.toLowerCase() !== response.data.city.name.toLowerCase()) {
+          setIsValidCityName(false);
         } else if (response.data && response.data.list) {
-          setIsCityNameValid(true);
+          setIsValidCityName(true);
           setForecastData(response.data);
         } else {
+          // Log an error if the API response is unexpected
           console.error('Unexpected API response:', response);
           setForecastData(null);
-          setIsCityNameValid(false);
+          setIsValidCityName(false);
         }
       } catch (error) {
-        setIsCityNameValid(false);
+        // Log an error if there is an issue fetching data
+        setIsValidCityName(false);
         console.error('Error fetching forecast data:', error);
       }
     };
 
+    // Fetch forecast data when city or unit changes
     fetchForecastData();
   }, [city, unit]);
 
+  // Function to convert temperature based on unit
   const convertTemperature = (temperature) => {
-    if (unit === 'metric') {
-      return (temperature - 273.15).toFixed(2) + '°C';
+    if (unit === 'celcius') {
+      return `${(temperature - 273.15).toFixed(2)}°C`;
     } else {
-      return ((temperature - 273.15) * (9 / 5) + 32).toFixed(2) + '°F';
+      return `${(((temperature - 273.15) * 9 / 5) + 32).toFixed(2)}°F`;
     }
   };
 
+  // Function to render the forecast UI
   const renderForecast = () => {
-    if (!forecastData || !forecastData.list || !iscitynamevalid) {
+    // Check if forecast data is available and city name is valid
+    if (!forecastData || !forecastData.list || !isValidCityName) {
       return <p>No forecast data available.</p>;
     }
 
+    // Get today's date and extract the first 5 forecast items
     const today = new Date();
     const forecastList = forecastData.list.slice(0, 5);
 
+    // Render the forecast items
     return (
       <div className="forecast">
         <h2>5-Day Forecast</h2>
         
         <ul>
-          
           {forecastList.map((item, index) => (
             <li key={item.dt}>
-      <b><h3>{new Date(today.getTime() + index * 24 * 60 * 60 * 1000).toLocaleDateString(undefined, { weekday: 'short' , year: 'numeric', month: 'long', day: 'numeric', })}</h3></b>
+              <b><h3>{new Date(today.getTime() + index * 24 * 60 * 60 * 1000).toLocaleDateString(undefined, { weekday: 'short' , year: 'numeric', month: 'long', day: 'numeric', })}</h3></b>
               <p>
+                {/* Display average temperature with icon and description */}
                 <abbr className="no-underline" title="Average Temperature">
-              <GiThermometerScale />
-              <strong>
-                
- {unit === 'metric' ? `${(item.main.temp - 273.15).toFixed(2)}°C` : `${(((item.main.temp - 273.15) * 9 / 5) + 32).toFixed(2)}°F`} 
- </strong></abbr> 
- <abbr className="no-underline" title={item.weather[0].description}><img
-                src={`https://openweathermap.org/img/w/${item.weather[0].icon}.png`}
-                alt={item.weather[0].description}
-              /> </abbr> </p>
-
-              <p><abbr className="no-underline" title="Weather"><em> {item.weather[0].description}</em></abbr></p>
-              
+                  <GiThermometerScale />
+                  <strong>{convertTemperature(item.main.temp)}</strong>
+                </abbr> 
+                <abbr className="no-underline" title={item.weather[0].description}>
+                  <img
+                    src={`https://openweathermap.org/img/w/${item.weather[0].icon}.png`}
+                    alt={item.weather[0].description}
+                  />
+                </abbr>
+              </p>
+              <p>
+                {/* Display weather description */}
+                <abbr className="no-underline" title="Weather">
+                  <em>{item.weather[0].description}</em>
+                </abbr>
+              </p>
             </li>
           ))}
         </ul>
-        
-        </div>
+      </div>
     );
   };
 
-  return <div>{iscitynamevalid && renderForecast()}</div>;
+  // Render the component with forecast data if the city name is valid
+  return <div>{isValidCityName && renderForecast()}</div>;
 };
 
 export default Forecast;
